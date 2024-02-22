@@ -34,6 +34,7 @@ dependencies:
   flutter_svg: 2.0.10+1
 #  carousel_slider: 4.2.1
   google_nav_bar: ^5.0.6
+  flutter_carousel_widget: ^2.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -68,6 +69,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/icons/
+    - assets/carousel/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
