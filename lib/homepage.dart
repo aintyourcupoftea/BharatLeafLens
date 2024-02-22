@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'navigation_bar.dart';
+// import 'navigation_bar.dart';
+import 'aesthetic_nav_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,28 +10,23 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     const String appTitle = 'Bharat Leaf Lens';
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
+        backgroundColor: Color(0xffF5F5DC), //Change later
         appBar: AppBar(
+          backgroundColor: Colors.amber, //Remove when debugged
           title: Center(
-            child: RichText(
+            child: Text(
+              "Welcome to\n$appTitle",
               textAlign: TextAlign.center,
-              text: TextSpan(
-                  children: [
-                    TextSpan(
-                        text: "Welcome to\n",
-                        style: GoogleFonts.playfairDisplay(fontWeight: FontWeight.w500) // Semi-bold
-                    ),
-                    TextSpan(
-                        text: "Bharat Leaf Lens",
-                        style: GoogleFonts.playfairDisplay(fontWeight: FontWeight.bold) // Bold
-                    ),
-                  ]
+              style: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-        bottomNavigationBar: MyBottomNavigationBar(),
+        bottomNavigationBar: AestheticNavBar()
       ),
     );
   }
