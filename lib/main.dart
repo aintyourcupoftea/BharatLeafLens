@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'bookmarks_page.dart';
 import 'profile_page.dart';
@@ -20,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   final List<Widget> _widgetList = [
-    const Text("Euu"),
+    const HomePage(),
     const BookmarksPage(),
     const ArticlesPage(),
     const SettingsPage()
@@ -38,18 +37,18 @@ class _MyAppState extends State<MyApp> {
           children: _widgetList,
         ),
         backgroundColor: const Color(0xffF5F5DC),
-        appBar: AppBar(
-          backgroundColor: Colors.amber,
-          title: Center(
-            child: Text(
-              "Welcome to\n$appTitle",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.playfairDisplay(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.amber,
+        //   title: Center(
+        //     child: Text(
+        //       "Welcome to\n$appTitle",
+        //       textAlign: TextAlign.center,
+        //       style: GoogleFonts.playfairDisplay(
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        //     ),
+        //   ),
+        // ),
         bottomNavigationBar: Container(
           color: Colors.black,
           child: Padding(
