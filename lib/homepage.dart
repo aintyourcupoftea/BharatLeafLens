@@ -13,16 +13,24 @@ class HomePage extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text(
-              "Welcome to\nBharat Leaf Lens",
+            child: RichText(
               textAlign: TextAlign.center,
-              style: GoogleFonts.playfairDisplay(
-                fontWeight: FontWeight.w600,
+              text: TextSpan(
+                  children: [
+                    TextSpan(
+                        text: "Welcome to\n",
+                        style: GoogleFonts.playfairDisplay(fontWeight: FontWeight.w500) // Semi-bold
+                    ),
+                    TextSpan(
+                        text: "Bharat Leaf Lens",
+                        style: GoogleFonts.playfairDisplay(fontWeight: FontWeight.bold) // Bold
+                    ),
+                  ]
               ),
             ),
           ),
         ),
-        bottomNavigationBar: MyBottomNavigationBar()
+        bottomNavigationBar: MyBottomNavigationBar(),
       ),
     );
   }
