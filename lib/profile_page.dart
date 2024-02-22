@@ -1,9 +1,8 @@
-import 'package:bharat_leaf_lens/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,6 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: MyBottomNavigationBar(),
     );
   }
 }

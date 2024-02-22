@@ -1,4 +1,4 @@
-import 'package:bharat_leaf_lens/navigation_bar.dart';
+// import 'package:bharat_leaf_lens/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,7 +19,6 @@ class ArticlesPage extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      bottomNavigationBar: MyBottomNavigationBar(),
     );
   }
 }
