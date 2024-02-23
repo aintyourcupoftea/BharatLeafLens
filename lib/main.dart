@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'bookmarks_page.dart';
-import 'profile_page.dart';
-import 'articles_page.dart';
-import 'homepage.dart';
+import 'pages/bookmarks_page.dart';
+import 'pages/profile_page.dart';
+import 'pages/articles_page.dart';
+import 'pages/homepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,18 +37,6 @@ class _MyAppState extends State<MyApp> {
           children: _widgetList,
         ),
         backgroundColor: const Color(0xffF5F5DC),
-        // appBar: AppBar(
-        //   backgroundColor: Colors.amber,
-        //   title: Center(
-        //     child: Text(
-        //       "Welcome to\n$appTitle",
-        //       textAlign: TextAlign.center,
-        //       style: GoogleFonts.playfairDisplay(
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //   ),
-        // ),
         bottomNavigationBar: Container(
           color: Colors.black,
           child: Padding(

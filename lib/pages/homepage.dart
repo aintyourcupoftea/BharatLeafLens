@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,9 +22,9 @@ class HomePage extends StatelessWidget {
           ),
         )
         .toList();
+
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Color(0xff7B3F00),
         toolbarHeight: 150,
         title: Center(
           child: RichText(
@@ -45,16 +45,6 @@ class HomePage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.brown.shade900,
                     fontSize: 36,
-                    // foreground: Paint()
-                    //   ..shader = LinearGradient(
-                    //     colors: [
-                    //       Color(0xffFF9933), // Saffron
-                    //       Color(0xff138808),
-                    //       // Color(0xff17E700), // Green
-                    //     ],
-                    //   ).createShader(
-                    //     Rect.fromLTWH(125, 0, 100, 0),
-                    //   ),
                   ),
                 )
               ],
@@ -66,10 +56,9 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Container(),
-            ),
+            Expanded(child: Container()), // Space before carousel
             SizedBox(
+              // Your carousel widget
               height: 200,
               width: 300,
               child: FlutterCarousel(
@@ -98,49 +87,75 @@ class HomePage extends StatelessWidget {
                   slideIndicator: CircularSlideIndicator(
                     currentIndicatorColor: Colors.black,
                     indicatorBackgroundColor: Colors.brown,
-                  ),
+                  ), // ... Your existing carousel options ...
                 ),
               ),
             ),
-            Expanded(child: Container()),
+            Expanded(child: Container()), // Space after the carousel
+            // Button Row
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton.icon(
+                  ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff889452),
+                      minimumSize: const Size(150, 80),
+                      elevation: 4,
+                      shadowColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
                     ),
                     onPressed: () {},
-                    icon: SvgPicture.asset(
-                      "assets/icons/camera.svg", // Your SVG icon path
-                      width: 24,
-                      height: 24,
-                    ),
-                    label: Text(
-                      "Take picture",
-                      style: TextStyle(color: Colors.white),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/camera.svg",
+                          height: 24,
+                          width: 24,
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "Take picture",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
-                  ElevatedButton.icon(
+                  ElevatedButton(
+                    // Similar structure for Button 2
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff325721),
+                      minimumSize: const Size(150, 80),
+                      elevation: 4,
+                      shadowColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
                     ),
                     onPressed: () {},
-                    icon: SvgPicture.asset(
-                      "assets/icons/upload_Image.svg",
-                      width: 24,
-                      height: 24,
-                    ),
-                    label: Text(
-                      "Upload image",
-                      style: TextStyle(color: Colors.white),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/upload_Image.svg",
+                          height: 24,
+                          width: 24,
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "Upload picture",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
