@@ -28,7 +28,10 @@ class _MySplashScreenState extends State<MySplashScreen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.deepOrangeAccent, Colors.green],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomRight,
+            colors: [Colors.deepOrangeAccent, Colors.white, Colors.green.shade700],
+
           ),
         ),
         child: Center(
@@ -39,14 +42,12 @@ class _MySplashScreenState extends State<MySplashScreen> {
               fontSize: 36,
               foreground: Paint()
                 ..shader = LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                   // Change to RadialGradient
                   colors: [
-                    Color(0xff051C13),
-                    Color(0xff1B4723),
-                    Color(0xff69A832),
-                    Color(0xff99D689),
-                    Color(0xffD8F19C),
-                    Color(0xffC2D5B9)
+                    Colors.blue.shade900,
+                    Colors.deepPurple.shade500
                   ],
                 ).createShader(
                   Rect.fromLTWH(-150, 1, 800, 0),
