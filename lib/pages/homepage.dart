@@ -25,6 +25,8 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
         toolbarHeight: 150,
         title: Center(
           child: RichText(
@@ -52,19 +54,23 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: Container()), // Space before carousel
+            Expanded(
+              child: Container(),
+            ), // Space before carousel
             SizedBox(
               // Your carousel widget
-              height: 200,
+              height: 300,
               width: 300,
               child: FlutterCarousel(
                 items: imageWidgets,
                 options: CarouselOptions(
-                  height: 150.0,
+                  indicatorMargin: 0,
+                  height: 250.0,
                   aspectRatio: 1 / 1,
                   viewportFraction: 1.0,
                   initialPage: 0,
@@ -73,7 +79,7 @@ class HomePage extends StatelessWidget {
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 3),
                   autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
+                  autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
                   enlargeCenterPage: false,
                   controller: CarouselController(),
                   pageSnapping: true,
@@ -84,7 +90,7 @@ class HomePage extends StatelessWidget {
                   enlargeStrategy: CenterPageEnlargeStrategy.scale,
                   disableCenter: false,
                   showIndicator: true,
-                  slideIndicator: CircularSlideIndicator(
+                  slideIndicator: const CircularSlideIndicator(
                     currentIndicatorColor: Colors.black,
                     indicatorBackgroundColor: Colors.brown,
                   ), // ... Your existing carousel options ...
@@ -98,59 +104,65 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff889452),
-                      minimumSize: const Size(150, 80),
-                      elevation: 4,
-                      shadowColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff889452),
+                        minimumSize: const Size(150, 90),
+                        elevation: 4,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
                       ),
-                    ),
-                    onPressed: () {},
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          "assets/icons/camera.svg",
-                          height: 24,
-                          width: 24,
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Take picture",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                      onPressed: () {},
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            "assets/icons/camera.svg",
+                            height: 24,
+                            width: 24,
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            "Take picture",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  ElevatedButton(
-                    // Similar structure for Button 2
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff325721),
-                      minimumSize: const Size(150, 80),
-                      elevation: 4,
-                      shadowColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ElevatedButton(
+                      // Similar structure for Button 2
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff325721),
+                        minimumSize: const Size(150, 90),
+                        elevation: 4,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
                       ),
-                    ),
-                    onPressed: () {},
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          "assets/icons/upload_Image.svg",
-                          height: 24,
-                          width: 24,
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Upload picture",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                      onPressed: () {},
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            "assets/icons/upload_Image.svg",
+                            height: 24,
+                            width: 24,
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            "Choose picture",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
