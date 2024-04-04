@@ -1,0 +1,74 @@
+0 Aloevera
+1 Amla
+2 Amruthaballi
+3 Arali
+4 Ashoka
+5 Asthma Weed
+6 Badipala
+7 Balloon Vine
+8 Bamboo
+9 Beans
+10 Betel
+11 Brahmi
+12 Bhringraj
+13 Camphor
+14 Caricature
+15 Castor
+16 Catharanthus
+17 Chilli
+18 Coffee
+19 Naagadaali
+20 Coriander
+21 Curry
+22 Doddapatre
+23 Moringa
+24 Crown Flower
+25 Nilgiri
+26 Nutsedges
+27 Ganike
+28 Opium Poppy
+29 Ginger
+30 Globe Amaranth
+31 Guava
+32 Henna
+33 Hibiscus
+34 Hongay
+35 Fiery Costus
+36 Jackfruit
+37 Jasmine
+38 Kasamarda
+39 Kohlrabi
+40 Lantanas
+41 Lemon
+42 Lemongrass
+43 Malabar Nut
+44 Malabar Spinach
+45 Mango
+46 Marigold
+47 Mint
+48 Neem
+49 Nilavembu
+50 Java Plum
+51 Noni
+52 Onion
+53 Padri Tree
+54 Spinach
+55 Papaya
+56 Night Flowering Jasmine
+57 Pea
+58 Pepper
+59 Pomegranate
+60 Pumpkin
+61 Raddish
+62 Rose
+63 Champak
+64 Sapodilla
+65 Sita Ashoka
+66 Sugar Apple
+67 Tamarind
+68 Taro
+69 Trumpetbushes
+70 Lavender-Leaved Leucas
+71 Tomato
+72 Tulsi
+73 Turmeric
