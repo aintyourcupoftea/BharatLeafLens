@@ -1,6 +1,9 @@
 import 'package:bharat_leaf_lens/components/home_components.dart';
+import 'package:bharat_leaf_lens/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'results.dart';
+
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({super.key});
@@ -19,7 +22,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
   _navigateToHome() async {
     await Future.delayed(Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomeComponents()));
+        context, MaterialPageRoute(builder: (context) => HomePage()));
   }
 
   @override

@@ -1,0 +1,40 @@
+0 Wood Sorel
+1 Tulasi
+2 Chicoo
+3 Rose
+4 Raktachandini
+5 Pomegranate
+6 Pepper
+7 Papaya
+8 Nooni
+9 Nityapushpa
+10 Neem
+11 Naagadali
+12 Mint
+13 Mango
+14 Lemon Grass
+15 Lemon
+16 Jasmine
+17 Insulin
+18 Honge
+19 Hibiscus
+20 Henna
+21 Geranium
+22 Guava
+23 Ganike
+24 Ekka
+25 Doddapatre
+26 Curry Leaf
+27 Castor
+28 Brahmi
+29 Betel Nut
+30 Betel
+31 Basale
+32 Bamboo
+33 Avocado
+34 Ashwagandha
+35 Ashoka
+36 Arali
+37 Amruthaballi
+38 Amla
+39 Aloevera
