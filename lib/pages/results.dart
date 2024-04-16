@@ -27,8 +27,8 @@ class _ResultsPageState extends State<ResultsPage> {
 
   Future<void> _tfLiteInit() async {
     String? res = await Tflite.loadModel(
-        model: "assets/model/model_unquant.tflite",
-        labels: "assets/model/labels.txt",
+        model: "assets/model/better.tflite",
+        labels: "assets/model/better.txt",
         numThreads: 1, // defaults to 1
         isAsset:
             true, // defaults to true, set to false to load resources outside assets

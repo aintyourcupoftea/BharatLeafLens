@@ -32,12 +32,13 @@ dependencies:
     sdk: flutter
   google_fonts: 6.1.0
   flutter_svg: 2.0.10+1
-#  carousel_slider: 4.2.1
   google_nav_bar: ^5.0.6
   flutter_carousel_widget: ^2.2.0
   image_picker: ^0.8.9
   flutter_tflite: ^1.0.1
-
+  lottie: ^3.1.0
+  http: ^1.2.1
+  flutter_rounded_progress_bar: ^0.3.2
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:image_picker/image_picker.dart';
-import 'results.dart';
+import 'package:lottie/lottie.dart'; // Lottie package import
+import 'online_results.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -33,6 +34,9 @@ class _HomePageState extends State<HomePage> {
         _image = File(pickedFile.path);
         Navigator.push(
           context,
+          // MaterialPageRoute(
+          //   builder: (context) => ResultsPage(image: _image!),
+          // ),
           MaterialPageRoute(
             builder: (context) => ResultsPage(image: _image!),
           ),
@@ -123,40 +127,13 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(child: Container()),
+              // Lottie Animation Here
               SizedBox(
-                height: 300,
-                width: 300,
-                child: FlutterCarousel(
-                  items: imageWidgets,
-                  options: CarouselOptions(
-                    indicatorMargin: 0,
-                    height: 250.0,
-                    aspectRatio: 1 / 1,
-                    viewportFraction: 1.0,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastEaseInToSlowEaseOut,
-                    enlargeCenterPage: false,
-                    controller: CarouselController(),
-                    pageSnapping: true,
-                    scrollDirection: Axis.horizontal,
-                    pauseAutoPlayOnTouch: true,
-                    pauseAutoPlayOnManualNavigate: true,
-                    pauseAutoPlayInFiniteScroll: false,
-                    enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                    disableCenter: false,
-                    showIndicator: true,
-                    slideIndicator: const CircularSlideIndicator(
-                      currentIndicatorColor: Colors.black,
-                      indicatorBackgroundColor: Colors.brown,
-                    ),
-                  ),
-                ),
+                height: 300, // Adjust height as needed
+                width: 300,  // Adjust width as needed
+                child: Lottie.asset('assets/icons/homepage_animation.json'),
               ),
+
               Expanded(child: Container()),
               Padding(
                 padding: const EdgeInsets.all(12.0),
