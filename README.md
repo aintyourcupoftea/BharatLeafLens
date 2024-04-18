@@ -64,6 +64,6 @@ Technologies used in the project:
 *   Tflite
 *   PyTorch
 
-<h2>💖Like my work?</h2>
+<h2>⭐️ Enjoying Bharat Leaf Lens?</h2>
 
 <p>Give us a star ⭐️ to show your support!</p>
