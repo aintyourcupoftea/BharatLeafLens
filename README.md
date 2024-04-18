@@ -6,11 +6,16 @@
 
 <h2>Project Screenshots:</h2>
 
-<div style="display: flex; justify-content: center; gap: 10px;">
+<div style="text-align: center;">
     <img src="https://raw.githubusercontent.com/aintyourcupoftea/BharatLeafLens/master/Screenshot_20240415_225431.png" alt="project-screenshot" width="360" height="640/">
+</div>
+<div style="text-align: center;">
     <img src="https://raw.githubusercontent.com/aintyourcupoftea/BharatLeafLensWebsite/master/2.png?token=GHSAT0AAAAAACODBPMZTWPW4K3V23YJE2HKZRBLXSQ" alt="project-screenshot" width="360" height="640/">
+</div>
+<div style="text-align: center;">
     <img src="https://aintyourcupoftea.github.io/BharatLeafLensWebsite/3.png" alt="project-screenshot" width="360" height="640/">
 </div>
+
 
 
   
