@@ -63,3 +63,7 @@ Technologies used in the project:
 *   Flutter
 *   Tflite
 *   PyTorch
+
+<h2>💖Like my work?</h2>
+
+<p>Give us a star ⭐️ to show your support!</p>
