@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/splash_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     const String appTitle = 'Bharat Leaf Lens';
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appTitle,
       home: MySplashScreen(),

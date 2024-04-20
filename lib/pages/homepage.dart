@@ -5,7 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart'; // Lottie package import
-import 'online_results.dart';
+import 'testingProgressBar.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -21,49 +22,89 @@ class _HomePageState extends State<HomePage> {
   late Timer _backButtonTimer;
   bool _exitApp = false;
 
+  // Method to check internet connectivity
+  Future<bool> _checkConnectivity() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
+  }
+
+
   @override
   void initState() {
     super.initState();
-    _backButtonTimer = Timer(Duration(seconds: 2), () {});
+    _backButtonTimer = Timer(const Duration(seconds: 2), () {});
   }
 
-  Future getImage(ImageSource source) async {
+  Future<void> getImage(ImageSource source) async {
+    bool isConnected = await _checkConnectivity();
+    if (!isConnected) {
+      // Handle offline scenario
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("No Internet Connection"),
+            content: Text("Please connect to the internet to proceed."),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    // Proceed with image selection if online
     final pickedFile = await picker.pickImage(source: source);
-    setState(() {
-      if (pickedFile != null) {
+    if (pickedFile != null) {
+      setState(() {
         _image = File(pickedFile.path);
-        Navigator.push(
-          context,
-          // MaterialPageRoute(
-          //   builder: (context) => ResultsPage(image: _image!),
-          // ),
-          MaterialPageRoute(
-            builder: (context) => ResultsPage(image: _image!),
-          ),
-        );
-      } else {
-        print('No image selected.');
-      }
-    });
+      });
+
+      // Show loading indicator while processing image
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('Pre-Processing image...'),
+              ],
+            ),
+          );
+        },
+      );
+
+      // Process image asynchronously
+      await Future.delayed(const Duration(milliseconds: 500)); // Simulate processing time
+
+      // Dismiss loading indicator
+      Navigator.of(context).pop();
+
+      // Navigate to the results page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TestProgressBar(image: _image!),
+        ),
+      );
+    } else {
+      print('No image selected.');
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
-    final List<String> imageList = [
-      "assets/carousel/1.png",
-      "assets/carousel/2.png",
-      "assets/carousel/3.png"
-    ];
-
-    final List<Widget> imageWidgets = imageList
-        .map(
-          (imageAsset) => Image.asset(
-        imageAsset,
-        fit: BoxFit.cover,
-      ),
-    )
-        .toList();
-
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
@@ -73,7 +114,7 @@ class _HomePageState extends State<HomePage> {
             exit(0);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                 content: Text("Press back again to exit"),
                 duration: Duration(seconds: 2),
               ),
@@ -83,7 +124,7 @@ class _HomePageState extends State<HomePage> {
             _exitApp = true;
 
             _backButtonTimer.cancel();
-            _backButtonTimer = Timer(Duration(seconds: 2), () {
+            _backButtonTimer = Timer(const Duration(seconds: 2), () {
               // Reset the flag after 2 seconds
               _exitApp = false;
             });

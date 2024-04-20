@@ -21,32 +21,29 @@ class _MySplashScreenState extends State<MySplashScreen> {
   }
 
   _navigateToHome() async {
-    await Future.delayed(Duration(milliseconds: 1500), () {});
+    await Future.delayed(const Duration(milliseconds: 1500), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+        context, MaterialPageRoute(builder: (context) => const HomePage()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Color(0xFFC31432), Color(0xFF240B36)],
+          ),
+        ),
         child: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  spreadRadius: 2,
-                  blurRadius: 10,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            child: Lottie.asset(
-              'assets/icons/Animation - 1713177412186 (1).json',
-              height: 1000, // Adjust height as needed
-              width: 1000, // Adjust width as needed
+          child: Text(
+            'Bharat Leaf Lens',
+            style: GoogleFonts.merriweather(
+              fontSize: 32.0,
+              fontWeight: FontWeight.w900,
+              color:Colors.white
             ),
           ),
         ),

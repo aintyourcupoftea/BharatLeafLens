@@ -83,10 +83,10 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Results'),
+          title: const Text('Results'),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.close_rounded),
+            icon: const Icon(Icons.close_rounded),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -109,7 +109,7 @@ class _ResultsPageState extends State<ResultsPage> {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               'Plant Name: $label',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -117,7 +117,7 @@ class _ResultsPageState extends State<ResultsPage> {
             SizedBox(height: 8),
             Text(
               'The Accuracy is: ${(confidence).toStringAsFixed(0)}%',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),

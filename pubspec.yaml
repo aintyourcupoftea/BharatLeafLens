@@ -1,5 +1,6 @@
 name: bharat_leaf_lens
-description: "A new Flutter project."
+description: "Bharat Leaf Lens is your pocket guide to identifying medicinal plants in India.
+Powered by deep learning, it leverages an open-source dataset, allowing you to accurately recognize various plant species."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,7 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 2.0.1+2
 
 environment:
   sdk: '>=3.2.6 <4.0.0'
@@ -39,6 +40,8 @@ dependencies:
   lottie: ^3.1.0
   http: ^1.2.1
   flutter_rounded_progress_bar: ^0.3.2
+  image: ^3.2.0
+  connectivity_plus: ^6.0.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,6 +58,13 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: true
+  image_path: "assets/icons/logo.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icons/adaptive_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -101,3 +111,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+

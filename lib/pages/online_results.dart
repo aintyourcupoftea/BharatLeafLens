@@ -1,9 +1,9 @@
 import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart'; // Import Lottie package
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'dart:io';
 
 List<dynamic>? apiResponseList;
@@ -38,7 +38,7 @@ class _ResultsPageState extends State<ResultsPage> {
   }
 
   Future<void> predictImage() async {
-    final apiUrl = "https://api-inference.huggingface.co/models/dima806/medicinal_plants_image_detection";
+    const apiUrl = "https://api-inference.huggingface.co/models/dima806/medicinal_plants_image_detection";
     final headers = {
       "Authorization": "Bearer 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",
     };
@@ -95,10 +95,10 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Plant Prediction Results'),
+        title: Text('Plant Prediction Results', style: GoogleFonts.merriweather(),),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.close_rounded),
+          icon: const Icon(Icons.close_rounded),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -123,26 +123,26 @@ class _ResultsPageState extends State<ResultsPage> {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 12),
-            Text( // "Confidence Percent" text below the image
-              'Confidences in Percentage',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            const SizedBox(height: 12),
+            const Text( // "Confidence Percent" text below the image
+              'Confidences in Percentage :',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text( // "Confidence Percent" text below the image
               '$firstLabel : ${firstScoreDouble.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
             Text( // "Confidence Percent" text below the image
               '$secondLabel : ${secondScoreDouble.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
             Text( // "Confidence Percent" text below the image
               '$thirdLabel : ${thirdScoreDouble.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
           ],
