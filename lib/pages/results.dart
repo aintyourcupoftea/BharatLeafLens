@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:bharat_leaf_lens/pages/plantNotFound.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image/image.dart' as img;
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -94,8 +96,8 @@ class _Results extends State<Results> {
     if (response.statusCode == 200) {
       final dynamic responseData = jsonDecode(response.body);
       if (responseData is List<dynamic>) {
-        // Handle list response, if applicable
         print('Response is a list: $responseData');
+        // Set state only if responseData is a list
         setState(() {
           apiResponseList = responseData;
           firstLabel = apiResponseList?[0]['label'];
@@ -105,45 +107,23 @@ class _Results extends State<Results> {
               apiResponseList?[1]['score'] * 100.roundToDouble();
           thirdLabel = apiResponseList?[2]['label'];
           thirdScoreDouble = apiResponseList?[2]['score'] * 100.roundToDouble();
-          label = label;
-          confidence = confidence;
-          isLoading = false;
-        });
-      } else if (responseData is Map<String, dynamic>) {
-        // Handle map response
-        final String label = responseData['label'];
-        final double confidence =
-        double.parse(responseData['confidence'].toString());
-
-        setState(() {
-          this.label = label;
-          this.confidence = confidence;
-          isLoading = false; // Set isLoading to false here
-        });
-      } else {
-        // Handle errors
-        setState(() {
-          isLoading = false; // Set isLoading to false to stop loading indicator
+          isLoading = true; // Set isLoading to false here
         });
 
-        // Show alert dialog
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Error'),
-              content: const Text('Failed to get results. Please try again.'),
-              actions: [
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop(); // Close the dialog
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        // Check if the score of the first label is greater than or equal to 15%
+        if (firstScoreDouble >= 15) {
+          // Set isLoading to false if score is greater than or equal to 15%
+          setState(() {
+            isLoading = false;
+          });
+        }else {
+          // Navigate to PlantNotFound if score is less than 15%
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => PlantNotFound()),
+          );
+          return; // Return to stop further execution
+        }
       }
     }
   }
@@ -158,7 +138,11 @@ class _Results extends State<Results> {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.close_rounded),
+          icon: SvgPicture.asset(
+            'assets/icons/close_icon.svg', // Replace 'assets/close_icon.svg' with the path to your SVG file
+            height: 21, // Adjust height as needed
+            width: 21, // Adjust width as needed
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
