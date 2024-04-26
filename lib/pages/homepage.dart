@@ -6,11 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart'; // Lottie package import
 import 'results.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -21,12 +20,6 @@ class _HomePageState extends State<HomePage> {
   final picker = ImagePicker();
   late Timer _backButtonTimer;
   bool _exitApp = false;
-
-  // Method to check internet connectivity
-  Future<bool> _checkConnectivity() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    return connectivityResult != ConnectivityResult.none;
-  }
 
 
   @override

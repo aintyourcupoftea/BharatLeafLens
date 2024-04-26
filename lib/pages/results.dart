@@ -8,7 +8,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'dart:io';
-import 'dart:typed_data';
 
 
 List<dynamic>? apiResponseList;
@@ -106,8 +105,8 @@ class _Results extends State<Results> {
               apiResponseList?[1]['score'] * 100.roundToDouble();
           thirdLabel = apiResponseList?[2]['label'];
           thirdScoreDouble = apiResponseList?[2]['score'] * 100.roundToDouble();
-          this.label = label;
-          this.confidence = confidence;
+          label = label;
+          confidence = confidence;
           isLoading = false;
         });
       } else if (responseData is Map<String, dynamic>) {
