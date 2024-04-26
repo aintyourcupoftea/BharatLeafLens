@@ -1,10 +1,6 @@
-import 'package:bharat_leaf_lens/components/home_components.dart';
 import 'package:bharat_leaf_lens/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'results.dart';
-import 'package:lottie/lottie.dart';
-
 
 class MySplashScreen extends StatefulWidget {
   const MySplashScreen({super.key});

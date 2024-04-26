@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart'; // Lottie package import
-import 'testingProgressBar.dart';
+import 'results.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => TestProgressBar(image: _image!),
+          builder: (context) => Results(image: _image!),
         ),
       );
     } else {

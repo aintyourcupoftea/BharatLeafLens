@@ -1,103 +1,179 @@
-import 'dart:io';
+import 'dart:async';
+import 'package:image/image.dart' as img;
+import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter_tflite/flutter_tflite.dart'; // Import flutter_tflite package
-import 'dart:developer' as devtools;
+import 'package:lottie/lottie.dart'; // Import Lottie package
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
+import 'dart:io';
+import 'dart:typed_data';
 
-class ResultsPage extends StatefulWidget {
+
+List<dynamic>? apiResponseList;
+
+class Results extends StatefulWidget {
   final File image;
-
-  const ResultsPage({super.key, required this.image});
+  const Results({Key? key, required this.image}) : super(key: key);
 
   @override
-  State<ResultsPage> createState() => _ResultsPageState();
+  _Results createState() => _Results();
 }
 
-class _ResultsPageState extends State<ResultsPage> {
-  File? filePath; // Variable to store the file path
+class _Results extends State<Results> {
   String label = '';
   double confidence = 0.0;
+  bool isLoading = true; // Add a boolean to track loading state
+
+  // Declare these variables outside of initState or setState
+  String firstLabel = '';
+  String secondLabel = '';
+  String thirdLabel = '';
+
+  double firstScoreDouble = 0.0;
+  double secondScoreDouble = 0.0;
+  double thirdScoreDouble = 0.0;
 
   @override
   void initState() {
     super.initState();
-    _tfLiteInit(); // Initialize flutter_tflite
-    _storeFilePath(); // Call the function to store the file path
+    startImageProcessing(); // Call the function to start image processing
   }
 
-  Future<void> _tfLiteInit() async {
-    String? res = await Tflite.loadModel(
-        model: "assets/model/better.tflite",
-        labels: "assets/model/better.txt",
-        numThreads: 1, // defaults to 1
-        isAsset:
-            true, // defaults to true, set to false to load resources outside assets
-        useGpuDelegate:
-            false // defaults to false, set to true to use GPU delegate
-        );
-  }
+  Future<void> startImageProcessing() async {
+    // Start loading animation
+    setState(() {
+      isLoading = true;
+    });
 
-  Future<void> _storeFilePath() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    filePath = await widget.image.copy('${directory.path}/$fileName');
-    var imageMap = File(filePath!.path);
-    setState(
-      () {
-        filePath = imageMap;
-      },
-    );
-    var recognitions = await Tflite.runModelOnImage(
-        path: filePath!.path, // required
-        imageMean: 0.0, // defaults to 117.0
-        imageStd: 255.0, // defaults to 1.0
-        numResults: 2, // defaults to 5
-        threshold: 0.2, // defaults to 0.1
-        asynch: true // defaults to true
-        );
-    if (recognitions == null) {
-      devtools.log("recognitions is Null");
-      return;
+    // Prepare the image data
+    List<int> imageBytes = await widget.image.readAsBytes();
+    img.Image? image = img.decodeImage(imageBytes);
+    // Print the size of the original image
+    // print('Original Image Size: ${imageBytes.length / 1024} kilobytes');
+
+    if (image!.width > 1080 || image.height > 1080) {
+      // Resize the image asynchronously
+      image = await resizeImage(image);
+      // Encode the resized image back to bytes
+      imageBytes = img.encodeJpg(image!);
+      // Print a message indicating that the image is resized
+      // print('Image resized: ${image.width}x${image.height}');
+
+      // Print the size of the resized image
+      // print('Resized Image Size: ${imageBytes.length / 1024} kilobytes');
     }
-    devtools.log(recognitions.toString());
-    setState(
-      () {
-        confidence = (recognitions[0]['confidence'] * 100);
-        label = recognitions[0]['label'].toString();
-      },
-    );
+
+    // Call the function to make the API request
+    await predictImage(imageBytes);
   }
 
-  @override
-  void dispose() {
-    // Dispose flutter_tflite when the widget is disposed
-    Tflite.close();
-    // Delete the file when the widget is disposed (when navigating back)
-    if (filePath != null) {
-      filePath!.delete();
+  Future<img.Image?> resizeImage(img.Image image) async {
+    // Resize the image to half of its original resolution
+    return await Future(() => img.copyResize(
+      image,
+      width: image.width ~/ 2,
+      height: image.height ~/ 2,
+    ));
+  }
+
+  Future<void> predictImage(List<int> imageBytes) async {
+    const apiUrl =
+        "https://api-inference.huggingface.co/models/dima806/medicinal_plants_image_detection";
+    final headers = {
+      "Authorization": "Bearer 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",
+    };
+
+    // Make the API request
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: headers,
+      body: imageBytes,
+    );
+
+    if (response.statusCode == 200) {
+      final dynamic responseData = jsonDecode(response.body);
+      if (responseData is List<dynamic>) {
+        // Handle list response, if applicable
+        print('Response is a list: $responseData');
+        setState(() {
+          apiResponseList = responseData;
+          firstLabel = apiResponseList?[0]['label'];
+          firstScoreDouble = apiResponseList?[0]['score'] * 100.roundToDouble();
+          secondLabel = apiResponseList?[1]['label'];
+          secondScoreDouble =
+              apiResponseList?[1]['score'] * 100.roundToDouble();
+          thirdLabel = apiResponseList?[2]['label'];
+          thirdScoreDouble = apiResponseList?[2]['score'] * 100.roundToDouble();
+          this.label = label;
+          this.confidence = confidence;
+          isLoading = false;
+        });
+      } else if (responseData is Map<String, dynamic>) {
+        // Handle map response
+        final String label = responseData['label'];
+        final double confidence =
+        double.parse(responseData['confidence'].toString());
+
+        setState(() {
+          this.label = label;
+          this.confidence = confidence;
+          isLoading = false; // Set isLoading to false here
+        });
+      } else {
+        // Handle errors
+        setState(() {
+          isLoading = false; // Set isLoading to false to stop loading indicator
+        });
+
+        // Show alert dialog
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: const Text('Failed to get results. Please try again.'),
+              actions: [
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close the dialog
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Results'),
-          centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.close_rounded),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )),
+        title: Text(
+          'Plant Prediction Results',
+          style: GoogleFonts.merriweather(),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.close_rounded),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: isLoading
+            ? Lottie.asset('assets/icons/loading.json')
+            : Column(
           children: [
             Container(
-              width: 300, // Adjust the width as needed
-              height: 300, // Adjust the height as needed
+              // Image container placed at the top
+              width: 300,
+              height: 300,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -110,14 +186,76 @@ class _ResultsPageState extends State<ResultsPage> {
               ),
             ),
             const SizedBox(height: 12),
-            Text(
-              'Plant Name: $label',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            const Text(
+              // "Confidence Percent" text below the image
+              'Confidences in Percentage :',
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic),
+              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8),
-            Text(
-              'The Accuracy is: ${(confidence).toStringAsFixed(0)}%',
-              style: const TextStyle(fontSize: 16),
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.00),
+              child: RoundedProgressBar(
+                style: RoundedProgressBarStyle(
+                  borderWidth: 2,
+                  widthShadow: 3,
+                  colorProgress: const Color(0xFF4CAF50), // Green color for progress
+                  colorProgressDark: const Color(0xFF388E3C), // Darker green for shadow
+                  backgroundProgress: const Color(0xFFF1F8E9), // Light green background
+                ),
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                borderRadius: BorderRadius.circular(24),
+                percent:
+                firstScoreDouble, // Use the calculated percentage
+                height: 40,
+                childCenter: Text(
+                  '$firstLabel: ${firstScoreDouble.toStringAsFixed(2)}%',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.00),
+              child: RoundedProgressBar(
+                style: RoundedProgressBarStyle(
+                  borderWidth: 2,
+                  widthShadow: 3,
+                  colorProgress: const Color(0xFF4CAF50), // Green color for progress
+                  colorProgressDark: const Color(0xFF388E3C), // Darker green for shadow
+                  backgroundProgress: const Color(0xFFF1F8E9), // Light green background
+                ),
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                borderRadius: BorderRadius.circular(24),
+                percent: secondScoreDouble,
+                height: 40,
+                childCenter: Text(
+                  '$secondLabel: ${secondScoreDouble.toStringAsFixed(2)}%',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.00),
+              child: RoundedProgressBar(
+                style: RoundedProgressBarStyle(
+                  borderWidth: 2,
+                  widthShadow: 3,
+                  colorProgress: const Color(0xFF4CAF50), // Green color for progress
+                  colorProgressDark: const Color(0xFF388E3C), // Darker green for shadow
+                  backgroundProgress: const Color(0xFFF1F8E9), // Light green background
+                ),
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                borderRadius: BorderRadius.circular(24),
+                percent: thirdScoreDouble,
+                height: 40,
+                childCenter: Text(
+                  '$thirdLabel: ${thirdScoreDouble.toStringAsFixed(2)}%',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ],
         ),
