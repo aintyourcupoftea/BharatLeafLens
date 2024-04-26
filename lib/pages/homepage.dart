@@ -36,29 +36,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getImage(ImageSource source) async {
-    bool isConnected = await _checkConnectivity();
-    if (!isConnected) {
-      // Handle offline scenario
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("No Internet Connection"),
-            content: Text("Please connect to the internet to proceed."),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-      return;
-    }
-
     // Proceed with image selection if online
     final pickedFile = await picker.pickImage(source: source);
     if (pickedFile != null) {
