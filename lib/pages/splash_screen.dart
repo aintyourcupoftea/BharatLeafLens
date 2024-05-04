@@ -1,25 +1,56 @@
-import 'package:bharat_leaf_lens/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'homepage.dart';
 
-class MySplashScreen extends StatefulWidget {
-  const MySplashScreen({super.key});
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MySplashScreen> createState() => _MySplashScreenState();
+  Widget build(BuildContext context) {
+    const String appTitle = 'Bharat Leaf Lens';
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: appTitle,
+      home: MySplashScreen(),
+    );
+  }
+}
+
+class MySplashScreen extends StatefulWidget {
+  const MySplashScreen({Key? key}) : super(key: key);
+
+  @override
+  _MySplashScreenState createState() => _MySplashScreenState();
 }
 
 class _MySplashScreenState extends State<MySplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToHome();
+    _installProfileAndNavigateToHome();
   }
 
-  _navigateToHome() async {
-    await Future.delayed(const Duration(milliseconds: 1500), () {});
+  _installProfileAndNavigateToHome() async {
+    await _installProfile(); // Call the method to install the profile
+
+    // Delay for splash screen (if needed)
+    await Future.delayed(const Duration(milliseconds: 1500));
+
+    // Navigate to the home page
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const HomePage()));
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  }
+
+  Future<void> _installProfile() async {
+    // Add your code to install the profile here
+    // For example:
+    // await ProfileInstaller.install('aintyourcupoftea.web.app.bharat_leaf_lens');
   }
 
   @override
@@ -39,7 +70,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
             style: GoogleFonts.merriweather(
               fontSize: 32.0,
               fontWeight: FontWeight.w900,
-              color:Colors.white
+              color: Colors.white,
             ),
           ),
         ),

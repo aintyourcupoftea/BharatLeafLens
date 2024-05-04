@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart'; // Lottie package import
 import 'results.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -21,7 +20,6 @@ class _HomePageState extends State<HomePage> {
   late Timer _backButtonTimer;
   bool _exitApp = false;
 
-
   @override
   void initState() {
     super.initState();
@@ -29,12 +27,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getImage(ImageSource source) async {
-    // Proceed with image selection if online
+    final picker = ImagePicker(); // Initialize ImagePicker instance
+    print('Attempting to get image from $source');
+    // Proceed with image selection
     final pickedFile = await picker.pickImage(source: source);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
       });
+
+      print('Image selected: ${_image!.path}');
 
       // Show loading indicator while processing image
       showDialog(
@@ -55,7 +57,8 @@ class _HomePageState extends State<HomePage> {
       );
 
       // Process image asynchronously
-      await Future.delayed(const Duration(milliseconds: 500)); // Simulate processing time
+      await Future.delayed(
+          const Duration(milliseconds: 500)); // Simulate processing time
 
       // Dismiss loading indicator
       Navigator.of(context).pop();
@@ -73,7 +76,7 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-  @override
+      @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
@@ -141,7 +144,7 @@ class _HomePageState extends State<HomePage> {
               // Lottie Animation Here
               SizedBox(
                 height: 300, // Adjust height as needed
-                width: 300,  // Adjust width as needed
+                width: 300, // Adjust width as needed
                 child: Lottie.asset('assets/icons/homepage_animation.json'),
               ),
 

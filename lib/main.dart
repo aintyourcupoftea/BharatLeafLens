@@ -1,8 +1,8 @@
-import 'package:bharat_leaf_lens/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'pages/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -14,8 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-
   @override
   Widget build(BuildContext context) {
     const String appTitle = 'Bharat Leaf Lens';
@@ -26,4 +24,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
