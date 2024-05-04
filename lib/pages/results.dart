@@ -110,14 +110,14 @@ class _Results extends State<Results> {
           isLoading = true; // Set isLoading to false here
         });
 
-        // Check if the score of the first label is greater than or equal to 15%
-        if (firstScoreDouble >= 15) {
-          // Set isLoading to false if score is greater than or equal to 15%
+        // Check if the score of the first label is greater than or equal to 20%
+        if (firstScoreDouble >= 20) {
+          // Set isLoading to false if score is greater than or equal to 20%
           setState(() {
             isLoading = false;
           });
         }else {
-          // Navigate to PlantNotFound if score is less than 15%
+          // Navigate to PlantNotFound if score is less than 20%
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => PlantNotFound()),
