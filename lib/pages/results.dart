@@ -162,12 +162,16 @@ class _Results extends State<Results> {
           children: [
             Lottie.asset('assets/icons/loading.json'),
             const SizedBox(height: 16),
-            const Text('Processing Image...',
-                style: TextStyle(fontSize: 16)),
+            Text('Leaf Me Alone, I\'m Thinking...',
+                style: GoogleFonts.baloo2(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FontStyle.italic)
+            ),
           ],
         )
             : error.isNotEmpty
-            ? Text('Error: $error',
+            ? Text('Error occured! Please try again.: $error',
             style: TextStyle(
                 color: Colors.red, fontSize: 16))
             : Column(
