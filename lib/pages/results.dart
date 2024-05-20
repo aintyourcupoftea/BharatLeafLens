@@ -1,16 +1,15 @@
 import 'dart:async';
-import 'package:bharat_leaf_lens/pages/plantNotFound.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:image/image.dart' as img;
-import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart'; // Import Lottie package
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'dart:io';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
+import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:image/image.dart' as img;
+import 'package:lottie/lottie.dart';
+import 'plantNotFound.dart';
 
 List<dynamic>? apiResponseList;
 
@@ -25,9 +24,9 @@ class Results extends StatefulWidget {
 class _Results extends State<Results> {
   String label = '';
   double confidence = 0.0;
-  bool isLoading = true; // Add a boolean to track loading state
+  bool isLoading = true;
+  String error = ''; // Add error message variable
 
-  // Declare these variables outside of initState or setState
   String firstLabel = '';
   String secondLabel = '';
   String thirdLabel = '';
@@ -39,44 +38,48 @@ class _Results extends State<Results> {
   @override
   void initState() {
     super.initState();
-    startImageProcessing(); // Call the function to start image processing
+    startImageProcessing();
   }
 
   Future<void> startImageProcessing() async {
-    // Start loading animation
     setState(() {
       isLoading = true;
+      error = ''; // Clear any previous error messages
     });
 
-    // Prepare the image data
-    List<int> imageBytes = await widget.image.readAsBytes();
-    img.Image? image = img.decodeImage(imageBytes);
-    // Print the size of the original image
-    // print('Original Image Size: ${imageBytes.length / 1024} kilobytes');
+    try {
+      List<int> imageBytes = await widget.image.readAsBytes();
+      img.Image? image = img.decodeImage(imageBytes);
 
-    if (image!.width > 1080 || image.height > 1080) {
-      // Resize the image asynchronously
-      image = await resizeImage(image);
-      // Encode the resized image back to bytes
-      imageBytes = img.encodeJpg(image!);
-      // Print a message indicating that the image is resized
-      // print('Image resized: ${image.width}x${image.height}');
+      // Resize the image if necessary
+      if (image!.width > 1080 || image.height > 1080) {
+        image = await resizeImage(image);
+        imageBytes = img.encodeJpg(image!);
+      }
 
-      // Print the size of the resized image
-      // print('Resized Image Size: ${imageBytes.length / 1024} kilobytes');
+      await predictImage(imageBytes);
+    } catch (e) {
+      // Handle any errors during image processing
+      setState(() {
+        isLoading = false;
+        error = 'Error processing image: ${e.toString()}';
+      });
     }
-
-    // Call the function to make the API request
-    await predictImage(imageBytes);
   }
 
   Future<img.Image?> resizeImage(img.Image image) async {
-    // Resize the image to half of its original resolution
-    return await Future(() => img.copyResize(
-      image,
-      width: image.width ~/ 2,
-      height: image.height ~/ 2,
-    ));
+    int newWidth = image.width;
+    int newHeight = image.height;
+
+    // Determine the scaling factor based on the larger dimension
+    double scale = 1080 / (newWidth > newHeight ? newWidth : newHeight);
+
+    // Calculate new dimensions while maintaining aspect ratio
+    newWidth = (newWidth * scale).toInt();
+    newHeight = (newHeight * scale).toInt();
+
+    // Resize the image
+    return img.copyResize(image, width: newWidth, height: newHeight);
   }
 
   Future<void> predictImage(List<int> imageBytes) async {
@@ -86,45 +89,49 @@ class _Results extends State<Results> {
       "Authorization": "Bearer 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",
     };
 
-    // Make the API request
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: headers,
-      body: imageBytes,
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: headers,
+        body: imageBytes,
+      );
 
-    if (response.statusCode == 200) {
-      final dynamic responseData = jsonDecode(response.body);
-      if (responseData is List<dynamic>) {
-        print('Response is a list: $responseData');
-        // Set state only if responseData is a list
-        setState(() {
-          apiResponseList = responseData;
-          firstLabel = apiResponseList?[0]['label'];
-          firstScoreDouble = apiResponseList?[0]['score'] * 100.roundToDouble();
-          secondLabel = apiResponseList?[1]['label'];
-          secondScoreDouble =
-              apiResponseList?[1]['score'] * 100.roundToDouble();
-          thirdLabel = apiResponseList?[2]['label'];
-          thirdScoreDouble = apiResponseList?[2]['score'] * 100.roundToDouble();
-          isLoading = true; // Set isLoading to false here
-        });
-
-        // Check if the score of the first label is greater than or equal to 20%
-        if (firstScoreDouble >= 20) {
-          // Set isLoading to false if score is greater than or equal to 20%
+      if (response.statusCode == 200) {
+        final dynamic responseData = jsonDecode(response.body);
+        if (responseData is List<dynamic>) {
           setState(() {
+            apiResponseList = responseData;
+            firstLabel = apiResponseList?[0]['label'];
+            firstScoreDouble =
+                apiResponseList?[0]['score'] * 100.roundToDouble();
+            secondLabel = apiResponseList?[1]['label'];
+            secondScoreDouble =
+                apiResponseList?[1]['score'] * 100.roundToDouble();
+            thirdLabel = apiResponseList?[2]['label'];
+            thirdScoreDouble =
+                apiResponseList?[2]['score'] * 100.roundToDouble();
             isLoading = false;
           });
-        }else {
-          // Navigate to PlantNotFound if score is less than 20%
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => PlantNotFound()),
-          );
-          return; // Return to stop further execution
+
+          if (firstScoreDouble < 20) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => PlantNotFound()),
+            );
+          }
+        } else {
+          throw Exception('Invalid API response format');
         }
+      } else {
+        throw Exception(
+            'API request failed with status code: ${response.statusCode}');
       }
+    } catch (e) {
+      // Handle API call errors
+      setState(() {
+        isLoading = false;
+        error = 'Error predicting image: ${e.toString()}';
+      });
     }
   }
 
@@ -139,9 +146,9 @@ class _Results extends State<Results> {
         centerTitle: true,
         leading: IconButton(
           icon: SvgPicture.asset(
-            'assets/icons/close_icon.svg', // Replace 'assets/close_icon.svg' with the path to your SVG file
-            height: 21, // Adjust height as needed
-            width: 21, // Adjust width as needed
+            'assets/icons/close_icon.svg',
+            height: 21,
+            width: 21,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -150,11 +157,22 @@ class _Results extends State<Results> {
       ),
       body: Center(
         child: isLoading
-            ? Lottie.asset('assets/icons/loading.json')
+            ? Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset('assets/icons/loading.json'),
+            const SizedBox(height: 16),
+            const Text('Processing Image...',
+                style: TextStyle(fontSize: 16)),
+          ],
+        )
+            : error.isNotEmpty
+            ? Text('Error: $error',
+            style: TextStyle(
+                color: Colors.red, fontSize: 16))
             : Column(
           children: [
             Container(
-              // Image container placed at the top
               width: 300,
               height: 300,
               decoration: BoxDecoration(
@@ -170,7 +188,6 @@ class _Results extends State<Results> {
             ),
             const SizedBox(height: 12),
             const Text(
-              // "Confidence Percent" text below the image
               'Confidences in Percentage :',
               style: TextStyle(
                   fontSize: 18,
@@ -179,68 +196,34 @@ class _Results extends State<Results> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.00),
-              child: RoundedProgressBar(
-                style: RoundedProgressBarStyle(
-                  borderWidth: 2,
-                  widthShadow: 3,
-                  colorProgress: const Color(0xFF4CAF50), // Green color for progress
-                  colorProgressDark: const Color(0xFF388E3C), // Darker green for shadow
-                  backgroundProgress: const Color(0xFFF1F8E9), // Light green background
-                ),
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                borderRadius: BorderRadius.circular(24),
-                percent:
-                firstScoreDouble, // Use the calculated percentage
-                height: 40,
-                childCenter: Text(
-                  '$firstLabel: ${firstScoreDouble.toStringAsFixed(2)}%',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.00),
-              child: RoundedProgressBar(
-                style: RoundedProgressBarStyle(
-                  borderWidth: 2,
-                  widthShadow: 3,
-                  colorProgress: const Color(0xFF4CAF50), // Green color for progress
-                  colorProgressDark: const Color(0xFF388E3C), // Darker green for shadow
-                  backgroundProgress: const Color(0xFFF1F8E9), // Light green background
-                ),
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                borderRadius: BorderRadius.circular(24),
-                percent: secondScoreDouble,
-                height: 40,
-                childCenter: Text(
-                  '$secondLabel: ${secondScoreDouble.toStringAsFixed(2)}%',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.00),
-              child: RoundedProgressBar(
-                style: RoundedProgressBarStyle(
-                  borderWidth: 2,
-                  widthShadow: 3,
-                  colorProgress: const Color(0xFF4CAF50), // Green color for progress
-                  colorProgressDark: const Color(0xFF388E3C), // Darker green for shadow
-                  backgroundProgress: const Color(0xFFF1F8E9), // Light green background
-                ),
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                borderRadius: BorderRadius.circular(24),
-                percent: thirdScoreDouble,
-                height: 40,
-                childCenter: Text(
-                  '$thirdLabel: ${thirdScoreDouble.toStringAsFixed(2)}%',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+            buildProgressBar(firstLabel, firstScoreDouble),
+            buildProgressBar(secondLabel, secondScoreDouble),
+            buildProgressBar(thirdLabel, thirdScoreDouble),
           ],
+        ),
+      ),
+    );
+  }
+
+  // Helper function to create progress bars
+  Widget buildProgressBar(String label, double score) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40.00),
+      child: RoundedProgressBar(
+        style: RoundedProgressBarStyle(
+          borderWidth: 2,
+          widthShadow: 3,
+          colorProgress: const Color(0xFF4CAF50),
+          colorProgressDark: const Color(0xFF388E3C),
+          backgroundProgress: const Color(0xFFF1F8E9),
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        borderRadius: BorderRadius.circular(24),
+        percent: score,
+        height: 40,
+        childCenter: Text(
+          '$label: ${score.toStringAsFixed(2)}%',
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

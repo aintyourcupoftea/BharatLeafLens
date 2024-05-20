@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lottie/lottie.dart'; // Lottie package import
+import 'package:lottie/lottie.dart';
 import 'results.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,43 +27,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getImage(ImageSource source) async {
-    final picker = ImagePicker(); // Initialize ImagePicker instance
-    print('Attempting to get image from $source');
-    // Proceed with image selection
     final pickedFile = await picker.pickImage(source: source);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
       });
 
-      print('Image selected: ${_image!.path}');
-
-      // Show loading indicator while processing image
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return const AlertDialog(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text('Pre-Processing image...'),
-              ],
-            ),
-          );
-        },
-      );
-
-      // Process image asynchronously
-      await Future.delayed(
-          const Duration(milliseconds: 500)); // Simulate processing time
-
-      // Dismiss loading indicator
-      Navigator.of(context).pop();
-
-      // Navigate to the results page
+      // Navigate to the results page, passing the image
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -75,15 +45,13 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
-      @override
+  @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
         if (!didPop) {
           if (_exitApp) {
-            // If already pressed back once and within 2 seconds, exit the app
             exit(0);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -93,12 +61,10 @@ class _HomePageState extends State<HomePage> {
               ),
             );
 
-            // Set the flag to true after first back button press
             _exitApp = true;
 
             _backButtonTimer.cancel();
             _backButtonTimer = Timer(const Duration(seconds: 2), () {
-              // Reset the flag after 2 seconds
               _exitApp = false;
             });
           }
@@ -129,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.brown.shade900,
                       fontSize: 36,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -141,13 +107,11 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(child: Container()),
-              // Lottie Animation Here
               SizedBox(
-                height: 300, // Adjust height as needed
-                width: 300, // Adjust width as needed
+                height: 300,
+                width: 300,
                 child: Lottie.asset('assets/icons/homepage_animation.json'),
               ),
-
               Expanded(child: Container()),
               Padding(
                 padding: const EdgeInsets.all(12.0),
