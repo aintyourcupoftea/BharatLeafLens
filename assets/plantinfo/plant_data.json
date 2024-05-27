@@ -1,0 +1,631 @@
+[
+  {
+    "scientific_name": "Phyllanthus emblica",
+    "family": "Phyllanthaceae",
+    "description": "Amla, also known as Indian gooseberry, is a small, deciduous tree native to India. Its fruits are rich in vitamin C and have been used in Ayurvedic medicine for centuries.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Boosts immunity",
+      "Improves digestion",
+      "Reduces blood sugar levels",
+      "Supports liver health"
+    ],
+    "name": "Amla"
+  },
+  {
+    "scientific_name": "Helichrysum italicum",
+    "family": "Asteraceae",
+    "description": "Curry plant is a perennial herb with aromatic leaves that are commonly used in Indian cooking. It is known for its distinct flavor and medicinal properties.",
+    "medicinal_properties": [
+      "Anti-inflammatory",
+      "Antioxidant",
+      "Helps with digestion",
+      "Reduces stress and anxiety"
+    ],
+    "name": "Curry"
+  },
+  {
+    "scientific_name": "Piper betle",
+    "family": "Piperaceae",
+    "description": "Betel leaf is a vine that is commonly used in Southeast Asia. The leaves are chewed with areca nut and lime for their stimulating and psychoactive effects.",
+    "medicinal_properties": [
+      "Antibacterial",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Boosts energy levels"
+    ],
+    "name": "Betel"
+  },
+  {
+    "scientific_name": "Bambusa",
+    "family": "Poaceae",
+    "description": "Bamboo is a fast-growing, woody grass that is widely used in construction, furniture, and other industries. It also has various medicinal applications.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Supports bone health",
+      "Reduces cholesterol levels"
+    ],
+    "name": "Bamboo"
+  },
+  {
+    "scientific_name": "Spinacia oleracea",
+    "family": "Amaranthaceae",
+    "description": "Spinach is a leafy green vegetable that is a good source of vitamins, minerals, and antioxidants. It is commonly used in salads, soups, and other dishes.",
+    "medicinal_properties": [
+      "Rich in vitamins and minerals",
+      "Supports eye health",
+      "Antioxidant",
+      "Helps with digestion"
+    ],
+    "name": "Palak(Spinach)"
+  },
+  {
+    "scientific_name": "Coriandrum sativum",
+    "family": "Apiaceae",
+    "description": "Coriander is an annual herb with aromatic leaves and seeds that are used in cooking and for medicinal purposes.",
+    "medicinal_properties": [
+      "Anti-inflammatory",
+      "Antioxidant",
+      "Helps with digestion",
+      "Reduces cholesterol levels"
+    ],
+    "name": "Coriender"
+  },
+  {
+    "scientific_name": "Saraca asoca",
+    "family": "Fabaceae",
+    "description": "Ashoka tree is a medium-sized tree that is native to India. It is considered sacred in Hinduism and is known for its medicinal properties.",
+    "medicinal_properties": [
+      "Anti-inflammatory",
+      "Antimicrobial",
+      "Regulates menstrual cycle",
+      "Reduces stress and anxiety"
+    ],
+    "name": "Ashoka"
+  },
+  {
+    "scientific_name": "Cassia auriculata",
+    "family": "Fabaceae",
+    "description": "Seethapala, also known as Senna auriculata, is a shrub with yellow flowers and medicinal leaves. It is used in Ayurveda for its various health benefits.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Reduces cholesterol levels"
+    ],
+    "name": "Seethapala"
+  },
+  {
+    "scientific_name": "Cymbopogon citratus",
+    "family": "Poaceae",
+    "description": "Lemon grass is a perennial herb with a distinct lemon scent. It is used in cooking, teas, and essential oils.",
+    "medicinal_properties": [
+      "Antibacterial",
+      "Antioxidant",
+      "Helps with digestion",
+      "Reduces inflammation"
+    ],
+    "name": "Lemon_grass"
+  },
+  {
+    "scientific_name": "Carica papaya",
+    "family": "Caricaceae",
+    "description": "Papaya is a tropical fruit tree with large, juicy fruits. It is a good source of vitamins, minerals, and antioxidants.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Boosts immunity",
+      "Supports heart health"
+    ],
+    "name": "Pappaya"
+  },
+  {
+    "scientific_name": "Murraya koenigii",
+    "family": "Rutaceae",
+    "description": "Curry leaf is a small tree that is native to India. Its leaves are widely used in Indian cooking for their unique aroma and flavor.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Reduces cholesterol levels"
+    ],
+    "name": "Curry_Leaf"
+  },
+  {
+    "scientific_name": "Citrus limon",
+    "family": "Rutaceae",
+    "description": "Lemon is a citrus fruit that is rich in vitamin C and antioxidants. It is widely used in cooking, beverages, and for medicinal purposes.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Boosts immunity",
+      "Helps with digestion",
+      "Reduces blood pressure"
+    ],
+    "name": "Lemon"
+  },
+  {
+    "scientific_name": "Ocimum sanctum",
+    "family": "Lamiaceae",
+    "description": "Nooni, also known as Holy Basil, is an aromatic herb that is considered sacred in Hinduism. It is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Boosts immunity",
+      "Reduces stress and anxiety"
+    ],
+    "name": "Nooni"
+  },
+  {
+    "scientific_name": "Lawsonia inermis",
+    "family": "Lythraceae",
+    "description": "Henna is a small tree that is native to the Middle East. Its leaves are used to make a paste that is applied to skin and hair for its dyeing and medicinal properties.",
+    "medicinal_properties": [
+      "Antibacterial",
+      "Anti-inflammatory",
+      "Helps with hair growth",
+      "Soothes skin conditions"
+    ],
+    "name": "Henna"
+  },
+  {
+    "scientific_name": "Mangifera indica",
+    "family": "Anacardiaceae",
+    "description": "Mango is a tropical fruit tree that is native to India. It is known for its sweet, juicy fruit and is one of the most popular fruits in the world.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Boosts immunity",
+      "Supports heart health"
+    ],
+    "name": "Mango"
+  },
+  {
+    "scientific_name": "Ficus benghalensis",
+    "family": "Moraceae",
+    "description": "Doddpathre, also known as Banyan tree, is a large, fig tree that is native to India. It is considered sacred in Hinduism and is known for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports skin health"
+    ],
+    "name": "Doddpathre"
+  },
+  {
+    "scientific_name": "Tinospora cordifolia",
+    "family": "Menispermaceae",
+    "description": "Amruta balli, also known as Guduchi, is a vine that is native to India. It is used in Ayurveda for its various health benefits.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Boosts immunity",
+      "Supports liver health"
+    ],
+    "name": "Amruta_Balli"
+  },
+  {
+    "scientific_name": "Areca catechu",
+    "family": "Arecaceae",
+    "description": "Betel nut is a seed that is chewed with betel leaf and lime for its stimulating and psychoactive effects.",
+    "medicinal_properties": [
+      "Antibacterial",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Boosts energy levels"
+    ],
+    "name": "Betel_Nut"
+  },
+  {
+    "scientific_name": "Ocimum tenuiflorum",
+    "family": "Lamiaceae",
+    "description": "Tulsi, also known as Holy Basil, is an aromatic herb that is considered sacred in Hinduism. It is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Boosts immunity",
+      "Reduces stress and anxiety"
+    ],
+    "name": "Tulasi"
+  },
+  {
+    "scientific_name": "Punica granatum",
+    "family": "Lythraceae",
+    "description": "Pomegranate is a fruit-bearing shrub that is native to the Middle East. Its fruit is known for its sweet, tart flavor and is a good source of antioxidants.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Boosts immunity",
+      "Supports heart health"
+    ],
+    "name": "Pomegranate"
+  },
+  {
+    "scientific_name": "Ricinus communis",
+    "family": "Euphorbiaceae",
+    "description": "Castor plant is a shrub that is native to Africa. Its seeds contain a toxic oil that is used in medicine and industry.",
+    "medicinal_properties": [
+      "Laxative",
+      "Anti-inflammatory",
+      "Supports skin health",
+      "Helps with digestion"
+    ],
+    "name": "Castor"
+  },
+  {
+    "scientific_name": "Artocarpus heterophyllus",
+    "family": "Moraceae",
+    "description": "Jackfruit is a tropical fruit tree that is native to India. It produces large, edible fruits that are a good source of vitamins, minerals, and fiber.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Boosts immunity",
+      "Supports heart health"
+    ],
+    "name": "Jackfruit"
+  },
+  {
+    "scientific_name": "Gymnema sylvestre",
+    "family": "Asclepiadaceae",
+    "description": "Insulin plant is a vine that is native to India. It is used in Ayurveda for its ability to reduce blood sugar levels.",
+    "medicinal_properties": [
+      "Reduces blood sugar levels",
+      "Supports pancreatic function",
+      "Antioxidant",
+      "Helps with weight management"
+    ],
+    "name": "Insulin"
+  },
+  {
+    "scientific_name": "Piper nigrum",
+    "family": "Piperaceae",
+    "description": "Pepper is a vine that is native to India. Its fruits are dried and used as a spice.",
+    "medicinal_properties": [
+      "Anti-inflammatory",
+      "Antioxidant",
+      "Helps with digestion",
+      "Reduces cholesterol levels"
+    ],
+    "name": "Pepper"
+  },
+  {
+    "scientific_name": "Pterocarpus marsupium",
+    "family": "Fabaceae",
+    "description": "Raktachandini, also known as Red Sanders, is a tree that is native to India. It is known for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Supports liver health",
+      "Reduces blood sugar levels"
+    ],
+    "name": "Raktachandini"
+  },
+  {
+    "scientific_name": "Aloe vera",
+    "family": "Asphodelaceae",
+    "description": "Aloe vera is a succulent plant with thick, fleshy leaves that contain a clear gel. It is a popular houseplant and has been used for centuries for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Soothes skin conditions",
+      "Supports digestion",
+      "Helps with wound healing"
+    ],
+    "name": "Aloevera"
+  },
+  {
+    "scientific_name": "Jasminum",
+    "family": "Oleaceae",
+    "description": "Jasmine is a genus of flowering plants that are known for their fragrant flowers. They are commonly used in perfumes and teas.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Reduces stress and anxiety",
+      "Improves sleep quality"
+    ],
+    "name": "Jasmine"
+  },
+  {
+    "scientific_name": "Ficus benghalensis",
+    "family": "Moraceae",
+    "description": "Doddpathre, also known as Banyan tree, is a large, fig tree that is native to India. It is considered sacred in Hinduism and is known for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports skin health"
+    ],
+    "name": "Doddapatre"
+  },
+  {
+    "scientific_name": "Azadirachta indica",
+    "family": "Meliaceae",
+    "description": "Neem is a tree that is native to India. It has been used for centuries in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Antibacterial",
+      "Anti-inflammatory",
+      "Boosts immunity",
+      "Supports skin health",
+      "Helps with dental health"
+    ],
+    "name": "Neem"
+  },
+  {
+    "scientific_name": "Pelargonium",
+    "family": "Geraniaceae",
+    "description": "Geranium is a genus of flowering plants that are known for their fragrant leaves. They are commonly used in perfumes and essential oils.",
+    "medicinal_properties": [
+      "Antibacterial",
+      "Anti-inflammatory",
+      "Reduces stress and anxiety",
+      "Supports skin health"
+    ],
+    "name": "Geranium"
+  },
+  {
+    "scientific_name": "Rosa",
+    "family": "Rosaceae",
+    "description": "Rose is a genus of flowering plants that are known for their beautiful and fragrant flowers. They are commonly used in perfumes, teas, and for medicinal purposes.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Reduces stress and anxiety",
+      "Supports skin health"
+    ],
+    "name": "Rose"
+  },
+  {
+    "scientific_name": "Psidium guajava",
+    "family": "Myrtaceae",
+    "description": "Guava is a tropical fruit tree that is native to Central America. It is known for its sweet, juicy fruit and is a good source of vitamins, minerals, and antioxidants.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Boosts immunity",
+      "Supports heart health"
+    ],
+    "name": "Gauva"
+  },
+  {
+    "scientific_name": "Hibiscus",
+    "family": "Malvaceae",
+    "description": "Hibiscus is a genus of flowering plants that are known for their showy flowers. They are commonly used in teas and for medicinal purposes.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports heart health"
+    ],
+    "name": "Hibiscus"
+  },
+  {
+    "scientific_name": "Ixora",
+    "family": "Rubiaceae",
+    "description": "Nithyapushpa, also known as Ixora, is a genus of flowering plants that are native to tropical regions. They are known for their clusters of colorful flowers.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports skin health"
+    ],
+    "name": "Nithyapushpa"
+  },
+  {
+    "scientific_name": "Oxalis acetosella",
+    "family": "Oxalidaceae",
+    "description": "Wood sorrel is a perennial herb with heart-shaped leaves and small, white flowers. It is known for its sour taste and medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports skin health"
+    ],
+    "name": "Wood_sorel"
+  },
+  {
+    "scientific_name": "Tamarindus indica",
+    "family": "Fabaceae",
+    "description": "Tamarind is a tropical fruit tree that is native to Africa. It is known for its pods that contain a sweet, tangy pulp.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports heart health"
+    ],
+    "name": "Tamarind"
+  },
+  {
+    "scientific_name": "Psidium guajava",
+    "family": "Myrtaceae",
+    "description": "Guava is a tropical fruit tree that is native to Central America. It is known for its sweet, juicy fruit and is a good source of vitamins, minerals, and antioxidants.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Boosts immunity",
+      "Supports heart health"
+    ],
+    "name": "Guava"
+  },
+  {
+    "scientific_name": "Bacopa monnieri",
+    "family": "Plantaginaceae",
+    "description": "Bhrami, also known as Bacopa monnieri, is an herb that is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Improves cognitive function",
+      "Reduces stress and anxiety",
+      "Antioxidant",
+      "Supports heart health"
+    ],
+    "name": "Bhrami"
+  },
+  {
+    "scientific_name": "Manilkara zapota",
+    "family": "Sapotaceae",
+    "description": "Sapota is a tropical fruit tree that is native to Central America. It is known for its sweet, brown fruit.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Boosts immunity",
+      "Supports heart health"
+    ],
+    "name": "Sapota"
+  },
+  {
+    "scientific_name": "Eclipta prostrata",
+    "family": "Asteraceae",
+    "description": "Basale, also known as Bhringraj, is an herb that is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Promotes hair growth",
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Supports liver health"
+    ],
+    "name": "Basale"
+  },
+  {
+    "scientific_name": "Persea americana",
+    "family": "Lauraceae",
+    "description": "Avocado is a tropical fruit tree that is native to Central America. It is known for its creamy, buttery fruit.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Supports heart health",
+      "Promotes healthy cholesterol levels"
+    ],
+    "name": "Avacado"
+  },
+  {
+    "scientific_name": "Withania somnifera",
+    "family": "Solanaceae",
+    "description": "Ashwagandha is an herb that is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Reduces stress and anxiety",
+      "Boosts immunity",
+      "Supports sleep quality",
+      "Improves cognitive function"
+    ],
+    "name": "Ashwagandha"
+  },
+  {
+    "scientific_name": "Andrographis paniculata",
+    "family": "Acanthaceae",
+    "description": "Nagadali, also known as Kalmegh, is a herb that is native to India. It is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Anti-inflammatory",
+      "Antibacterial",
+      "Boosts immunity",
+      "Supports liver health"
+    ],
+    "name": "Nagadali"
+  },
+  {
+    "scientific_name": "Aralia",
+    "family": "Araliaceae",
+    "description": "Aralia is a genus of flowering plants that are native to temperate regions. They are known for their large, compound leaves and small, white flowers.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports skin health"
+    ],
+    "name": "Arali"
+  },
+  {
+    "scientific_name": "Terminalia chebula",
+    "family": "Combretaceae",
+    "description": "Ekka, also known as Chebulic Myrobalan, is a tree that is native to India. It is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports liver health"
+    ],
+    "name": "Ekka"
+  },
+  {
+    "scientific_name": "Hibiscus rosa-sinensis",
+    "family": "Malvaceae",
+    "description": "Ganike, also known as Chinese hibiscus, is a shrub that is native to East Asia. It is known for its showy, trumpet-shaped flowers.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Supports heart health"
+    ],
+    "name": "Ganike"
+  },
+  {
+    "scientific_name": "Ocimum tenuiflorum",
+    "family": "Lamiaceae",
+    "description": "Tulsi, also known as Holy Basil, is an aromatic herb that is considered sacred in Hinduism. It is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Boosts immunity",
+      "Reduces stress and anxiety"
+    ],
+    "name": "Tulasi"
+  },
+  {
+    "scientific_name": "Pongamia pinnata",
+    "family": "Fabaceae",
+    "description": "Honge, also known as Pongamia pinnata, is a tree that is native to India. It is known for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Supports skin health",
+      "Helps with dental health"
+    ],
+    "name": "Honge"
+  },
+  {
+    "scientific_name": "Mentha",
+    "family": "Lamiaceae",
+    "description": "Mint is a genus of flowering plants that are known for their aromatic leaves. They are commonly used in cooking, teas, and for medicinal purposes.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Helps with digestion",
+      "Reduces stress and anxiety",
+      "Supports respiratory health"
+    ],
+    "name": "Mint"
+  },
+  {
+    "scientific_name": "Catharanthus roseus",
+    "family": "Apocynaceae",
+    "description": "Catharanthus roseus, also known as Madagascar Periwinkle, is a flowering plant that is native to Madagascar. It is known for its medicinal properties.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Anti-inflammatory",
+      "Anti-cancer",
+      "Helps with diabetes management",
+      "Supports heart health"
+    ],
+    "name": "Catharanthus"
+  },
+  {
+    "scientific_name": "Carica papaya",
+    "family": "Caricaceae",
+    "description": "Papaya is a tropical fruit tree with large, juicy fruits. It is a good source of vitamins, minerals, and antioxidants.",
+    "medicinal_properties": [
+      "Antioxidant",
+      "Helps with digestion",
+      "Boosts immunity",
+      "Supports heart health"
+    ],
+    "name": "Papaya"
+  },
+  {
+    "scientific_name": "Bacopa monnieri",
+    "family": "Plantaginaceae",
+    "description": "Brahmi, also known as Bacopa monnieri, is an herb that is used in Ayurveda for its medicinal properties.",
+    "medicinal_properties": [
+      "Improves cognitive function",
+      "Reduces stress and anxiety",
+      "Antioxidant",
+      "Supports heart health"
+    ],
+    "name": "Brahmi"
+  }
+]

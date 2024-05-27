@@ -1,39 +1,36 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:bharat_leaf_lens/pages/plantNotFound.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
-import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:lottie/lottie.dart';
-import 'plantNotFound.dart';
 
-List<dynamic>? apiResponseList;
+import 'plant_info.dart'; // Import the plant information page
 
 class Results extends StatefulWidget {
   final File image;
   const Results({Key? key, required this.image}) : super(key: key);
 
   @override
-  _Results createState() => _Results();
+  _ResultsState createState() => _ResultsState();
 }
 
-class _Results extends State<Results> {
-  String label = '';
-  double confidence = 0.0;
+class _ResultsState extends State<Results> {
   bool isLoading = true;
   String error = ''; // Add error message variable
 
-  String firstLabel = '';
-  String secondLabel = '';
-  String thirdLabel = '';
-
-  double firstScoreDouble = 0.0;
-  double secondScoreDouble = 0.0;
-  double thirdScoreDouble = 0.0;
+  List<dynamic>? apiResponseList;
+  late String firstLabel;
+  late double firstScoreDouble;
+  late String secondLabel;
+  late double secondScoreDouble;
+  late String thirdLabel;
+  late double thirdScoreDouble;
 
   @override
   void initState() {
@@ -86,7 +83,7 @@ class _Results extends State<Results> {
     const apiUrl =
         "https://api-inference.huggingface.co/models/dima806/medicinal_plants_image_detection";
     final headers = {
-      "Authorization": "Bearer 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",
+      "Authorization": "Bearer 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",
     };
 
     try {
@@ -162,18 +159,21 @@ class _Results extends State<Results> {
           children: [
             Lottie.asset('assets/icons/loading.json'),
             const SizedBox(height: 16),
-            Text('Leaf Me Alone, I\'m Thinking...',
-                style: GoogleFonts.baloo2(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    fontStyle: FontStyle.italic)
+            Text(
+              'Leaf Me Alone, I\'m Thinking...',
+              style: GoogleFonts.baloo2(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ],
         )
             : error.isNotEmpty
-            ? Text('Error occured! Please try again.: $error',
-            style: TextStyle(
-                color: Colors.red, fontSize: 16))
+            ? Text(
+          'Error occurred! Please try again: $error',
+          style: TextStyle(color: Colors.red, fontSize: 16),
+        )
             : Column(
           children: [
             Container(
@@ -194,40 +194,67 @@ class _Results extends State<Results> {
             const Text(
               'Confidences in Percentage :',
               style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic),
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
-            buildProgressBar(firstLabel, firstScoreDouble),
-            buildProgressBar(secondLabel, secondScoreDouble),
-            buildProgressBar(thirdLabel, thirdScoreDouble),
+            buildPlantNameCard(firstLabel, firstScoreDouble),
+            buildPlantNameCard(secondLabel, secondScoreDouble),
+            buildPlantNameCard(thirdLabel, thirdScoreDouble),
           ],
         ),
       ),
     );
   }
 
-  // Helper function to create progress bars
-  Widget buildProgressBar(String label, double score) {
+  Widget buildPlantNameCard(String label, double score) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40.00),
-      child: RoundedProgressBar(
-        style: RoundedProgressBarStyle(
-          borderWidth: 2,
-          widthShadow: 3,
-          colorProgress: const Color(0xFF4CAF50),
-          colorProgressDark: const Color(0xFF388E3C),
-          backgroundProgress: const Color(0xFFF1F8E9),
-        ),
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        borderRadius: BorderRadius.circular(24),
-        percent: score,
-        height: 40,
-        childCenter: Text(
-          '$label: ${score.toStringAsFixed(2)}%',
-          style: const TextStyle(fontWeight: FontWeight.bold),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PlantInformationPage(plantName: label),
+            ),
+          );
+        },
+        child: Card(
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          color: score >= 70 ? Color(0xFFC8E6C9) : score >= 40 ? Color(0xFFFFF9C4) : Color(0xFFFFCDD2),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded( // Expanded to allow text wrapping
+                  child: Text(
+                    label,
+                    style: GoogleFonts.roboto( // Modern font choice
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color:  score >= 70 ? Color(0xFF2E7D32) : score >= 40 ? Color(0xFF8D6E63) : Color(0xFFB71C1C), // Color based on score
+                    ),
+                  ),
+                ),
+                SizedBox(width: 16),
+                Text(
+                  '${score.toStringAsFixed(2)}%',
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color:  score >= 70 ? Color(0xFF2E7D32) : score >= 40 ? Color(0xFF8D6E63) : Color(0xFFB71C1C), // Color based on score
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
